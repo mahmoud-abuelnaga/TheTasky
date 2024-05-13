@@ -1,0 +1,103 @@
+#: import ButtonColor components.commons.ButtonColor
+<MainScreen>:
+    id: main
+    name: "main"
+    MDFloatLayout:
+        Image:
+            source: "assets/check.png"
+            size_hint: .46, .46
+            pos_hint: {'center_x': .5, 'center_y': .8}
+        MDLabel:
+            text: "Tasky"
+            theme_font_name: "Custom"
+            font_style: "Display"
+            role: "large"
+            bold: True            
+            halign: "center"
+            pos_hint: {'center_x': .5, 'center_y': .58}
+            color: "#ffffff" 
+
+        MDLabel:
+            text: "Tasky is simple and minimal\ntask management app written in python."
+            theme_font_name: "Custom"
+            font_style: "Headline"
+            role: "small"
+            italic: True
+            bold: True
+            halign: "center"
+            pos_hint: {'center_x': .5, 'center_y': .48}
+            color: "gray" 
+
+        MDIcon:
+            icon: "github"
+            pos_hint: {'center_x': .3, 'center_y': .104}
+            theme_font_size: "Custom"
+            color: "#ffffff"
+            font_size: "32sp"
+
+        MDLabel:
+            text: "Check source code at:"
+            theme_font_name: "Custom"
+            font_style: "Title"
+            role: "large"
+            bold: True
+            halign: "center"
+            pos_hint: {'center_x': .5, 'center_y': .1}
+            color: "gray" 
+
+        MDLabel:
+            text: "https://github.com/mahmoud-mohammed00/tasky"
+            theme_font_name: "Custom"
+            font_style: "Title"
+            role: "medium"
+            halign: "center"
+            pos_hint: {'center_x': .5, 'center_y': .06}
+            color: "gray" 
+
+
+    MDFloatLayout:
+        pos_hint: {"center_x": .5, "center_y": .4}
+
+        MDButton:
+            style: "filled"
+            pos_hint: {"center_x": .5, "center_y":.42}
+            theme_width: "Custom"
+            theme_height: "Custom"
+            size_hint_x: .3
+            size_hint_y: .04
+            theme_bg_color: "Custom"
+            on_release: root.login()
+            md_bg_color: ButtonColor
+            radius: 15
+            MDButtonText:
+                text: "LOGIN"
+                theme_font_name: "Custom"
+                theme_font_size: "Custom"
+                font_name: "assets/Poppins/Poppins-Bold.ttf"
+                bold: True
+                pos_hint: {"center_x": .5, "center_y": .5}
+
+        MDButton:
+            style: "outlined"
+            pos_hint: {"center_x": .5, "center_y":.35}
+            theme_width: "Custom"
+            theme_height: "Custom"
+            size_hint_x: .3
+            auto_height: True
+            size_hint_y: .04
+            theme_line_color: "Custom"
+            theme_line_width: "Custom"
+            line_color: ButtonColor
+            line_width: 2
+            radius: 15
+            on_release: root.signup()
+            MDButtonText:
+                text: "SIGNUP"
+                theme_font_name: "Custom"
+                theme_font_size: "Custom"
+                theme_font_color: "Custom"
+                color: "#ffffff"
+                bold: True
+                font_name: "assets/Poppins/Poppins-Bold.ttf"
+                pos_hint: {"center_x": .5, "center_y": .5}
+

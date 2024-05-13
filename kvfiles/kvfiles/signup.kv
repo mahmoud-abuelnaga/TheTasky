@@ -1,0 +1,88 @@
+#: include kvfiles/commons.kv
+#: import ButtonColor components.commons.ButtonColor
+
+<SignupScreen>:
+    id: signup_screen
+    name: "signup"
+    MDFloatLayout:
+        BackButton:
+            id: back_button
+            screen: root
+            size_hint_x: .7
+            pos_hint: {"center_x": .4, "center_y": .85}
+        Image:
+            source: "assets/user.png"
+            size_hint: .32, .32
+            pos_hint: {'center_x': .5, 'center_y': .8}
+        MDLabel:
+            text: "SIGNUP"
+            theme_font_name: "Custom"
+            font_style: "Display"
+            role: "large"
+            bold: True            
+            halign: "center"
+            pos_hint: {'center_x': .5, 'center_y': .58}
+            color: "#ffffff" 
+        MDIcon:
+            icon: "github"
+            pos_hint: {'center_x': .3, 'center_y': .104}
+            theme_font_size: "Custom"
+            color: "#ffffff"
+            font_size: "32sp"
+
+        MDLabel:
+            text: "Check source code at:"
+            theme_font_name: "Custom"
+            font_style: "Title"
+            role: "large"
+            bold: True
+            halign: "center"
+            pos_hint: {'center_x': .5, 'center_y': .1}
+            color: "gray" 
+
+        MDLabel:
+            text: "https://github.com/mahmoud-mohammed00/tasky"
+            theme_font_name: "Custom"
+            font_style: "Title"
+            role: "medium"
+            halign: "center"
+            pos_hint: {'center_x': .5, 'center_y': .06}
+            color: "gray" 
+
+    MDFloatLayout:
+        pos_hint: {"center_x": .5, "center_y": .4}
+
+        NameField:
+            id: name_field
+            size_hint_x: .7
+            pos_hint: {"center_x": .5, "center_y": .6}
+
+        EmailField:
+            id: email_field
+            size_hint_x: .7
+            pos_hint: {"center_x": .5, "center_y": .51}
+
+        PasswordField:
+            id: password_field
+            size_hint_x: .7
+            pos_hint: {"center_x": .5, "center_y": .49}
+
+        MDButton:
+            style: "filled"
+            pos_hint: {"center_x": .5, "center_y":.32}
+            theme_width: "Custom"
+            theme_height: "Custom"
+            size_hint_x: .3
+            size_hint_y: .04
+            theme_bg_color: "Custom"
+            on_release: root.signup()
+            md_bg_color: ButtonColor
+            radius: 15
+
+            MDButtonText:
+                text: "SIGNUP"
+                theme_font_name: "Custom"
+                theme_font_size: "Custom"
+                font_name: "assets/Poppins/Poppins-Bold.ttf"
+                pos_hint: {"center_x": .5, "center_y": .5}
+                bold: True

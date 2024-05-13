@@ -1,0 +1,123 @@
+<PasswordField>:
+    MDTextField:
+        id: password
+        theme_text_color: "Custom"
+        theme_line_color: "Custom"
+        theme_bg_color: "Custom"
+        line_color_focus: "green"
+        text_color_normal: 1,1,1,1
+        text_color_focus: 1,1,1,1
+        mode: "outlined"
+        password: True
+        required: True
+        size_hint: 1, .08 
+        pos_hint: {"center_x": .5, "center_y": .43}
+        on_text: root.on_text(password, password.text)
+        MDTextFieldLeadingIcon:
+            icon: "key-variant"
+            theme_icon_color: "Custom"
+            icon_color_normal: "white"
+            icon_color_focus: "lightgreen"
+
+        MDTextFieldHintText:
+            theme_text_color: "Custom"
+            text_color_normal: 1,1,1,1
+            text_color_focus: 1,1,1,1
+            text: "Password"
+
+    MDIconButton:
+        icon: "eye-off"
+        pos_hint: {"center_x":.93, "center_y": .43}
+        theme_text_color: "Hint"
+        on_release:
+            self.icon = "eye" if self.icon == "eye-off" else "eye-off"
+            password.password = False if password.password is True else True
+
+<EmailField>:
+    MDTextField:
+        id: email
+        theme_text_color: "Custom"
+        theme_line_color: "Custom"
+        theme_bg_color: "Custom"
+        line_color_focus: "green"
+        text_color_normal: 1,1,1,1
+        text_color_focus: 1,1,1,1
+        mode: "outlined"
+        validator: "email"
+        required: True
+        size_hint: 1, .08 
+        pos_hint: {"center_x": .5, "center_y": .5}
+
+        MDTextFieldLeadingIcon:
+            icon: "account"
+            theme_icon_color: "Custom"
+            icon_color_normal: "white"
+            icon_color_focus: "lightgreen"
+
+        MDTextFieldHintText:
+            theme_text_color: "Custom"
+            text_color_normal: 1,1,1,1
+            text_color_focus: 1,1,1,1
+            text: "Email"
+
+<NameField>:
+    MDTextField:
+        id: name
+        theme_text_color: "Custom"
+        theme_line_color: "Custom"
+        theme_bg_color: "Custom"
+        line_color_focus: "green"
+        text_color_normal: 1,1,1,1
+        text_color_focus: 1,1,1,1
+        mode: "outlined"
+        size_hint: 1, .08 
+        pos_hint: {"center_x": .5, "center_y": .5}
+        required: True
+        MDTextFieldLeadingIcon:
+            icon: "account"
+            theme_icon_color: "Custom"
+            icon_color_normal: "white"
+            icon_color_focus: "lightgreen"
+
+        MDTextFieldHintText:
+            theme_text_color: "Custom"
+            text_color_normal: 1,1,1,1
+            text_color_focus: 1,1,1,1
+            text: "Name"
+
+<BackButton>:
+    MDIconButton:
+        icon: "chevron-left"
+        style: "outlined"
+        theme_icon_color: "Custom"
+        icon_color: "white"
+        pos_hint: {"center_y": .6}
+        on_release: root.back()
+        radius: 12 
+        theme_line_color: "Custom" 
+        theme_line_width: "Custom"
+        line_color : ButtonColor
+        theme_bg_color: "Custom"
+        md_bg_color : ButtonColor
+
+        line_width: 1
+
+<TeamBadge>: 
+    adaptive_height: True
+    orientation: "horizontal"
+    spacing: "20dp"
+    MDIcon:
+        id: myicon
+        icon: "circle"
+        theme_font_size: "Custom"
+        color: root.color 
+        font_size: "32sp"
+
+    MDLabel:
+        id: label
+        text: root.team
+        theme_font_name: "Custom"
+        font_style: "Title"
+        role: "large"
+        bold: True
+        color: "white" 

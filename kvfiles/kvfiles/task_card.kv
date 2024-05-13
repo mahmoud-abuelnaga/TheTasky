@@ -1,0 +1,26 @@
+#: import ButtonColor components.commons.ButtonColor
+
+<TaskCard>
+    MDListItem:
+        theme_bg_color: "Custom"
+        md_bg_color: ButtonColor
+        radius: root.radius
+        pos_hint: {"center_x": .5}
+        size_hint_x: .9
+        radius: 16
+
+        MDListItemLeadingAvatar:
+            source: root.avatar
+            radius: self.height / 2
+            color: "lightgreen"
+
+        MDListItemHeadlineText:
+            text: f"[ {root.team} ]  {root.title}"
+            theme_text_color: "Custom"
+            color: "#ffffff"
+
+
+        MDListItemSupportingText:
+            text: f"Due:  {root.date}  {root.time}"
+            theme_text_color: "Custom"
+            text_color: "#ffffff"

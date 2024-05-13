@@ -1,0 +1,118 @@
+#: include kvfiles/commons.kv
+#: import ButtonColor components.commons.ButtonColor
+
+<InfoScreen>:
+    # id: info_screen
+    name: "my_info_screen"
+    on_pre_enter: self.on_pre_enter()
+    MDFloatLayout:
+        BackButton:
+            id: back_button
+            screen: root
+            size_hint_x: .7
+            pos_hint: {"center_x": .4, "center_y": .85}
+        Image:
+            source: "assets/user.png"
+            size_hint: .32, .32
+            pos_hint: {'center_x': .5, 'center_y': .8}
+        MDLabel:
+            text: "About me"
+            theme_text_color: "Custom"
+            text_color: "#ffffff"
+            font_style: "Headline"
+            role: "large"
+            bold: True
+            pos_hint: {"center_x": .65, "center_y": .945}
+        MDLabel:
+            text: root.user_name
+            theme_font_name: "Custom"
+            font_style: "Display"
+            role: "small"
+            bold: True            
+            halign: "center"
+            pos_hint: {'center_x': .5, 'center_y': .58}
+            color: "#ffffff" 
+        MDLabel:
+            text: root.email
+            theme_font_name: "Custom"
+            font_style: "Title"
+            role: "large"
+            bold: True            
+            halign: "center"
+            pos_hint: {'center_x': .5, 'center_y': .52}
+            color: "#ffffff" 
+
+        GridLayout:
+            id: team_badges
+            cols: 2
+            # orientation: "vertical"
+            adaptive_height: True
+            spacing: "5dp", "10dp" 
+            pos_hint: {"center_x": .5, "top": .45}
+            size_hint_x: .7
+            size_hint_y: .3
+
+        MDIcon:
+            icon: "github"
+            pos_hint: {'center_x': .3, 'center_y': .104}
+            theme_font_size: "Custom"
+            color: "#ffffff"
+            font_size: "32sp"
+
+        MDLabel:
+            text: "Check source code at:"
+            theme_font_name: "Custom"
+            font_style: "Title"
+            role: "large"
+            bold: True
+            halign: "center"
+            pos_hint: {'center_x': .5, 'center_y': .1}
+            color: "gray" 
+
+        MDLabel:
+            text: "https://github.com/mahmoud-mohammed00/tasky"
+            theme_font_name: "Custom"
+            font_style: "Title"
+            role: "medium"
+            halign: "center"
+            pos_hint: {'center_x': .5, 'center_y': .06}
+            color: "gray" 
+        MDButton:
+            style: "filled"
+            pos_hint: {"center_x": .5, "center_y":.17}
+            theme_width: "Custom"
+            theme_height: "Custom"
+            size_hint_x: .3
+            size_hint_y: .04
+            theme_bg_color: "Custom"
+            on_release: root.signout()
+            md_bg_color: ButtonColor
+            radius: 15
+
+            MDButtonText:
+                text: "SIGNOUT"
+                theme_font_name: "Custom"
+                theme_font_size: "Custom"
+                font_name: "assets/Poppins/Poppins-Bold.ttf"
+                pos_hint: {"center_x": .5, "center_y": .5}
+                bold: True
+
+        MDButton:
+            style: "filled"
+            pos_hint: {"center_x": .5, "center_y":.23}
+            theme_width: "Custom"
+            theme_height: "Custom"
+            size_hint_x: .3
+            size_hint_y: .04
+            theme_bg_color: "Custom"
+            on_release: root.open_create_team_screen()
+            md_bg_color: ButtonColor
+            radius: 15
+
+            MDButtonText:
+                text: "CREATE TEAM"
+                theme_font_name: "Custom"
+                theme_font_size: "Custom"
+                font_name: "assets/Poppins/Poppins-Bold.ttf"
+                pos_hint: {"center_x": .5, "center_y": .5}
+                bold: True
