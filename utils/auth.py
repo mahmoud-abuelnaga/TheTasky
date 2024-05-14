@@ -9,6 +9,7 @@ from typing import Annotated
 
 # Models
 from models.user import UserModel
+from models.team import TeamModel
 
 # constants
 ALGORITHM = "HS256"
@@ -68,3 +69,12 @@ async def getRequestUser(
         )
 
     return user
+
+
+def isMemberInTeam(user: UserModel, team: TeamModel):
+    try:
+        inTeam = team.members.index(user)
+    except Exception as e:
+        return False
+
+    return True
