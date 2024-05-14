@@ -12,7 +12,7 @@ class TaskScreen(Screen):
     token = StringProperty("")
 
     def on_pre_enter(self, *_):
-        pass 
+        pass
         # tasks = get_user_tasks(self.token)
         # if not tasks:
         #     return
@@ -29,19 +29,20 @@ class TaskScreen(Screen):
         self.screen_manager.current = "add_task"
 
     def create_task(self, task):
-            
+
         self.add_task(task)
 
     def add_task(self, task):
         self.ids["tasks_container"].add_widget(
             TaskCard(
-                title = task["title"],
-                note = task["note"],
-                time = task["time"],
-                date = task["date"],
-                team = task["team"]
+                title=task["title"],
+                note=task["note"],
+                time=task["time"],
+                date=task["date"],
+                team=task["team"],
             )
         )
+
     def handle_task(self, task):
         task_dict = {}
         task_dict["title"] = task["name"]

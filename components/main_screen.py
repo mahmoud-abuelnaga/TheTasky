@@ -1,6 +1,7 @@
 from kivy.uix.screenmanager import Screen, SlideTransition
 from kivy.properties import ObjectProperty
 
+
 class MainScreen(Screen):
     screen_manager = ObjectProperty(None)
 

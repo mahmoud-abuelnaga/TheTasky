@@ -12,8 +12,7 @@ from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.snackbar import MDSnackbar, MDSnackbarSupportingText, MDSnackbarText
 
 ButtonColor = "#2992b5"
-TOKEN = ""
-TOKEN_CHANGED = True
+
 
 class SelectableRecycleGridLayout(
     FocusBehavior, LayoutSelectionBehavior, RecycleBoxLayout
@@ -27,18 +26,19 @@ class EmailField(MDRelativeLayout):
 
 class PasswordField(MDRelativeLayout):
     text = StringProperty()
+
     def on_text(self, instance, text):
-        if len(text) < 5: 
-            self.error = True 
+        if len(text) < 5:
+            self.error = True
+
 
 class NameField(MDRelativeLayout):
     text = StringProperty()
 
 
 class TeamBadge(MDBoxLayout):
-    team  = StringProperty()
+    team = StringProperty()
     color = ColorProperty()
-
 
 
 class BackButton(MDRelativeLayout):
@@ -54,7 +54,7 @@ def show_msg_on_screen_base(msg, bg_color):
             text=msg,
             pos_hint={"center_x": 0.5},
             theme_text_color="Custom",
-            text_color="black"
+            text_color="black",
         ),
         y=dp(24),
         orientation="horizontal",
@@ -70,4 +70,3 @@ def show_error_on_screen(error_msg):
 
 def show_success_on_screen(msg):
     show_msg_on_screen_base(msg, "lightgreen")
-    

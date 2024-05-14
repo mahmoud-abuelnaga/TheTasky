@@ -10,6 +10,7 @@ from kivymd.uix.floatlayout import MDFloatLayout
 
 from kivymd.uix.list.list import MDListItem
 
+
 class TaskCard(RecycleDataViewBehavior, MDBoxLayout):
     title = StringProperty()
     time = StringProperty()
