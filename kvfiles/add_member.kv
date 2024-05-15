@@ -1,8 +1,9 @@
 #: include kvfiles/commons.kv
 #: import ButtonColor components.commons.ButtonColor
 
-<CreateTeamScreen>:
-    name: "create_team"
+
+<AddMemberScreen>:
+    name: "add_member"
     MDFloatLayout:
         BackButton:
             id: back_button
@@ -10,7 +11,7 @@
             size_hint_x: .7
             pos_hint: {"center_x": .4, "center_y": .85}
         MDLabel:
-            text: "Create Team"
+            text: "Add Team Member"
             theme_text_color: "Custom"
             text_color: "#ffffff"
             font_style: "Headline"
@@ -48,10 +49,41 @@
                 line_color_focus: "green"
                 text_color_normal: 1,1,1,1
                 text_color_focus: 1,1,1,1
-                required: True
-
+                # required: True
+                on_focus: root.open_available_teams_menu(self.focus)
                 MDTextFieldHintText:
                     text: "Team Name"
+                    theme_text_color: "Custom"
+                    text_color_normal: 1,1,1,1
+                    text_color_focus: 1,1,1,1
+
+
+        MDBoxLayout:
+            orientation: "vertical"
+            spacing: "25dp"
+            adaptive_height: True
+            MDLabel:
+                text: "Member Email"
+                theme_text_color: "Custom"
+                text_color: "#ffffff"
+                font_style: "Title"
+                role: "large"
+                bold: True
+
+            MDTextField:
+                color_mode: 'accent'
+                id : email_field
+                mode: "outlined"
+                theme_text_color: "Custom"
+                theme_line_color: "Custom"
+                theme_bg_color: "Custom"
+                line_color_focus: "green"
+                text_color_normal: 1,1,1,1
+                text_color_focus: 1,1,1,1
+                # required: True
+                validator: "email"
+                MDTextFieldHintText:
+                    text: "Email"
                     theme_text_color: "Custom"
                     text_color_normal: 1,1,1,1
                     text_color_focus: 1,1,1,1
@@ -65,7 +97,7 @@
         size_hint_x: .3
         size_hint_y: .04
         theme_bg_color: "Custom"
-        on_release: root.confirm_create_team()
+        on_release: root.confirm_join_team()
         md_bg_color: ButtonColor
         radius: 15
 
@@ -73,9 +105,8 @@
             icon: "plus"
 
         MDButtonText:
-            text: "CREATE TEAM"
+            text: "ADD MEMBER"
             theme_font_size: "Custom"
             theme_font_name: "Custom"
             font_name: "assets/Poppins/Poppins-Bold.ttf"
             pos_hint: {"center_x": .55, "center_y": .5}
-
