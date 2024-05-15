@@ -9,6 +9,7 @@ from typing import Annotated
 
 # Models
 from models.user import UserModel
+from models.task import TaskModel
 from models.team import TeamModel
 
 # constants
@@ -78,3 +79,12 @@ def isMemberInTeam(user: UserModel, team: TeamModel):
         return False
 
     return True
+
+
+def canAccessTask(user: UserModel, task: TaskModel):
+    if (
+        not isMemberInTeam(user, task.assignedTeam) and task.creatorID != user.id
+    ):  # TODO: CHECK if the condition works for teams
+        return False
+    else:
+        return True
