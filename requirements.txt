@@ -1,0 +1,4 @@
+requests-cache
+kivymd
+kivy
+asynckivy
