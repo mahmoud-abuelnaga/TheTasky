@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 from sqlalchemy import or_, and_
 
 # our modules
-from schemas import user as userSchemas
+from schemas import user as userSchemas, team as teamSchemas
 from utils import database, user as userUtils, auth
 from models.user import UserModel
 
@@ -31,6 +31,16 @@ def updateUser(
     reqUser: UserModel = Depends(auth.getRequestUser),
 ) -> userSchemas.UserRead:
     return userUtils.updateUser(reqUser, updateData, db)
+
+
+
+@router.get("/me/teams")
+def getTeams(
+    reqUser: UserModel = Depends(auth.getRequestUser),
+) -> list[teamSchemas.TeamRead]:
+    teams = reqUser.joinedTeams
+    teams.extend(reqUser.createdTeams)
+    return teams
 
 
 @router.get("/{userID}")
