@@ -4,8 +4,9 @@ from sqlalchemy.orm import Session
 from sqlalchemy import or_, and_
 
 # our modules
-from schemas import user as userSchemas, team as teamSchemas
+from schemas import user as userSchemas, task as taskSchemas, team as teamSchemas
 from utils import database, user as userUtils, auth
+from models.task import TaskModel
 from models.user import UserModel
 
 # setup
@@ -24,6 +25,14 @@ def deleteUser(
     return {"message": "User Deleted"}
 
 
+@router.get("/me")
+def getDetails(
+    db: Session = Depends(database.getSession),
+    reqUser: UserModel = Depends(auth.getRequestUser),
+) -> userSchemas.DetailedUserRead:
+    return db.query(UserModel).filter(UserModel.id == reqUser.id).first()
+
+
 @router.patch("/me")
 def updateUser(
     updateData: userSchemas.UserUpdate,
@@ -32,6 +41,27 @@ def updateUser(
 ) -> userSchemas.UserRead:
     return userUtils.updateUser(reqUser, updateData, db)
 
+
+@router.get("/me/tasks")
+def getTasks(
+    db: Session = Depends(database.getSession),
+    reqUser: UserModel = Depends(auth.getRequestUser),
+) -> list[taskSchemas.TaskRead]:
+    # tasks = reqUser.assignedTasks
+    # for task in reqUser.createdTasks:
+    #     if task.teamID == None:
+    #         tasks.append(task)
+
+    return (
+        db.query(TaskModel)
+        .filter(
+            or_(
+                and_(TaskModel.creatorID == reqUser.id, TaskModel.teamID == None),
+                TaskModel.assignedToID == reqUser.id,
+            )
+        )
+        .all()
+    )
 
 
 @router.get("/me/teams")
