@@ -4,6 +4,7 @@ from kivy.properties import ObjectProperty, StringProperty
 
 from api.user import get_user_details, get_user_teams
 from .auth import rest_token_cache
+from .commons import *
 
 
 class InfoScreen(Screen):
@@ -18,16 +19,14 @@ class InfoScreen(Screen):
         # get_user_teams(self.token)
 
     def open_create_team_screen(self):
-        self.screen_manager.transition = SlideTransition()
-        self.screen_manager.current = "create_team"
+        make_transition(self.screen_manager, "create_team")
+
+    def open_add_member_screen(self):
+        make_transition(self.screen_manager, "add_member")
 
     def back(self):
-        self.screen_manager.transition = SlideTransition()
-        self.screen_manager.transition.direction = "right"
-        self.screen_manager.current = "tasks"
+        make_transition(self.screen_manager, "tasks", "right")
 
     def signout(self):
         rest_token_cache()
-        self.screen_manager.transition = SlideTransition()
-        self.screen_manager.transition.direction = "right"
-        self.screen_manager.current = "main"
+        make_transition(self.screen_manager, "main", "right")

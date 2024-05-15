@@ -28,10 +28,7 @@ class SignupScreen(Screen):
             show_error_on_screen("User is already registered")
 
     def login(self):
-        self.screen_manager.transition = SlideTransition()
-        self.screen_manager.current = "login"
+        make_transition(self.screen_manager, "login")
 
     def back(self):
-        self.screen_manager.transition = SlideTransition()
-        self.screen_manager.transition.direction = "right"
-        self.screen_manager.current = "main"
+        make_transition(self.screen_manager, "main", "right")

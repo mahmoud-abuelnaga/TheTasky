@@ -14,10 +14,9 @@ from kivymd.uix.snackbar import MDSnackbar, MDSnackbarSupportingText, MDSnackbar
 ButtonColor = "#2992b5"
 
 
-class SelectableRecycleGridLayout(
-    FocusBehavior, LayoutSelectionBehavior, RecycleBoxLayout
-):
-    pass
+def make_transition(screen_manager, screen_name, direction="left"):
+    screen_manager.transition.direction = direction
+    screen_manager.current = screen_name
 
 
 class EmailField(MDRelativeLayout):
@@ -70,3 +69,9 @@ def show_error_on_screen(error_msg):
 
 def show_success_on_screen(msg):
     show_msg_on_screen_base(msg, "lightgreen")
+
+
+class SelectableRecycleGridLayout(
+    FocusBehavior, LayoutSelectionBehavior, RecycleBoxLayout
+):
+    pass

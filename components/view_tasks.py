@@ -3,8 +3,9 @@ from kivy.properties import ObjectProperty, StringProperty
 
 from datetime import datetime
 
-from api.task import get_user_tasks, get_team
+from api.task import get_user_tasks
 from .task_card import TaskCard
+from .commons import *
 
 
 class TaskScreen(Screen):
@@ -25,8 +26,7 @@ class TaskScreen(Screen):
         self.screen_manager.current = "my_info_screen"
 
     def open_add_task_window(self):
-        self.screen_manager.transition = SlideTransition()
-        self.screen_manager.current = "add_task"
+        make_transition(self.screen_manager, "add_task")
 
     def create_task(self, task):
 

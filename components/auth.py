@@ -2,7 +2,7 @@ import os
 from datetime import datetime, timedelta
 
 # in minutes
-TOKEN_EXPIRY = 30
+TOKEN_EXPIRY = 25
 TOKEN_CACHE_FILE = "token.txt"
 
 
