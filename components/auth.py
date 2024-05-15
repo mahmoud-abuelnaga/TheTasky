@@ -17,13 +17,13 @@ def file_modification_date(filename):
 
 
 def read_token():
-    if not os.path.exists("token.txt"):
+    if not os.path.exists(TOKEN_CACHE_FILE):
         return
 
     with open(TOKEN_CACHE_FILE, "r") as file:
         token = file.read()
 
-    return token
+    return token.strip()
 
 
 def is_valid_token(token):
