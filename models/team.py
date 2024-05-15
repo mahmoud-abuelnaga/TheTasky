@@ -33,7 +33,8 @@ class TeamModel(Base):
     teamCreator: Mapped["UserModel"] = relationship(back_populates="createdTeams")
 
     assignedTasks: Mapped[list["TaskModel"]] = relationship(
-        back_populates="assignedTeam"
+        back_populates="assignedTeam",
+        cascade="all, delete-orphan"
     )
     members: Mapped[list["UserModel"]] = relationship(
         back_populates="joinedTeams", secondary=associationTable
