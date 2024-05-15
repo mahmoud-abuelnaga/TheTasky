@@ -7,6 +7,7 @@ from models.reminder import ReminderModel
 
 scheduler = BackgroundScheduler()
 
+
 def get_remainders(db: Session, due_time: datetime):
     return db.query(ReminderModel).filter(ReminderModel.time <= due_time).all()
 
@@ -14,11 +15,12 @@ def get_remainders(db: Session, due_time: datetime):
 def check_reminders_due():
     now = datetime.now()
     due_time = now + timedelta(minutes=2)
-    
+
     due_reminders = get_remainders(due_time)
-    
+
     for reminder in due_reminders:
         send_notification(reminder)
+
 
 def start_scheduler():
     scheduler.add_job(
@@ -26,11 +28,11 @@ def start_scheduler():
         trigger=IntervalTrigger(hours=12),
         id="check_reminders_job",
         name="Check Reminders Due",
-        replace_existing=True
+        replace_existing=True,
     )
     scheduler.start()
 
+
 def send_notification(reminder: remainder.Reminder):
-    
+
     print(f"Sending notification for reminder: {reminder}")
-    

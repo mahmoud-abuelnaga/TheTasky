@@ -10,7 +10,7 @@ from models.reminder import ReminderModel
 from models.team import TeamModel
 
 # our modules
-from utils import database, auth, user as userUtils ,bacground_tasks
+from utils import database, auth, user as userUtils, bacground_tasks
 
 # routers
 from routers import user, task, team, auth, reminder
@@ -35,12 +35,12 @@ app.include_router(reminder.router)
 
 bacground_tasks.start_scheduler()
 
+
 # routes
 @app.get("/")
 def root():
     print(datetime.now())
     return {"message": "Hello World!"}
-    
 
 
 # @app.middleware("http")
