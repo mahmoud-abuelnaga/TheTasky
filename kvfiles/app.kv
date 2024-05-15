@@ -5,8 +5,12 @@
 #: include kvfiles/tasks.kv
 #: include kvfiles/user_info.kv
 #: include kvfiles/create_team.kv
+#: include kvfiles/add_member.kv
+
+#: import SlideTransition kivy.uix.screenmanager.SlideTransition
 
 ScreenManager:
+    transition: SlideTransition()
     MainScreen:
         screen_manager: root
     LoginScreen:
@@ -20,4 +24,6 @@ ScreenManager:
     AddTaskScreen:
         screen_manager: root
     CreateTeamScreen:
+        screen_manager: root
+    AddMemberScreen:
         screen_manager: root

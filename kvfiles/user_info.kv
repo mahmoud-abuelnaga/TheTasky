@@ -70,7 +70,7 @@
             color: "gray" 
 
         MDLabel:
-            text: "https://github.com/mahmoud-mohammed00/tasky"
+            text: "https://github.com/mahmoud-mohammed00/TheTasky"
             theme_font_name: "Custom"
             font_style: "Title"
             role: "medium"
@@ -78,28 +78,33 @@
             pos_hint: {'center_x': .5, 'center_y': .06}
             color: "gray" 
         MDButton:
-            style: "filled"
             pos_hint: {"center_x": .5, "center_y":.17}
+            style: "outlined"
             theme_width: "Custom"
             theme_height: "Custom"
             size_hint_x: .3
+            auto_height: True
             size_hint_y: .04
-            theme_bg_color: "Custom"
-            on_release: root.signout()
-            md_bg_color: ButtonColor
+            theme_line_color: "Custom"
+            theme_line_width: "Custom"
+            line_color: ButtonColor
+            line_width: 2
             radius: 15
+            on_release: root.signout()
 
             MDButtonText:
                 text: "SIGNOUT"
                 theme_font_name: "Custom"
+                theme_font_color: "Custom"
                 theme_font_size: "Custom"
                 font_name: "assets/Poppins/Poppins-Bold.ttf"
+                color: "#ffffff"
                 pos_hint: {"center_x": .5, "center_y": .5}
                 bold: True
 
         MDButton:
             style: "filled"
-            pos_hint: {"center_x": .5, "center_y":.23}
+            pos_hint: {"center_x": .5, "center_y":.25}
             theme_width: "Custom"
             theme_height: "Custom"
             size_hint_x: .3
@@ -111,6 +116,26 @@
 
             MDButtonText:
                 text: "CREATE TEAM"
+                theme_font_name: "Custom"
+                theme_font_size: "Custom"
+                font_name: "assets/Poppins/Poppins-Bold.ttf"
+                pos_hint: {"center_x": .5, "center_y": .5}
+                bold: True
+
+        MDButton:
+            style: "filled"
+            pos_hint: {"center_x": .5, "center_y":.3}
+            theme_width: "Custom"
+            theme_height: "Custom"
+            size_hint_x: .3
+            size_hint_y: .04
+            theme_bg_color: "Custom"
+            on_release: root.open_add_member_screen()
+            md_bg_color: ButtonColor
+            radius: 15
+
+            MDButtonText:
+                text: "ADD MEMBER"
                 theme_font_name: "Custom"
                 theme_font_size: "Custom"
                 font_name: "assets/Poppins/Poppins-Bold.ttf"
