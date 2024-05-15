@@ -12,7 +12,7 @@ from components.signup import SignupScreen
 from components.view_tasks import TaskScreen
 from components.main_screen import MainScreen
 from components.user_info import InfoScreen
-from components.team import CreateTeamScreen
+from components.team import CreateTeamScreen, AddMemberScreen
 from components.auth import is_valid_token, read_token
 from components.commons import *
 
