@@ -5,6 +5,8 @@ from sqlalchemy.orm import Session
 # our modules
 from utils import database, team as teamUtils, user as userUtils, auth
 from schemas.team import TeamCreate, TeamRead, AddMember, UpdateTeam, RemoveMember
+from schemas.user import UserRead
+from schemas.task import TaskRead
 from models.user import UserModel
 
 # setup
@@ -28,38 +30,6 @@ def createTeam(
     return team
 
 
-@router.get("/{teamID}")
-def getTeam(
-    teamID: int,
-    db: Session = Depends(database.getSession),
-    reqUser: UserModel = Depends(auth.getRequestUser),
-) -> TeamRead:
-    team = teamUtils.getTeam(teamID, db)
-    if not team:
-        raise HTTPException(status_code=404, detail="Team not found")
-
-    if not auth.isMemberInTeam(reqUser, team) and team.creatorID != reqUser.id:
-        raise HTTPException(status_code=404, detail="Team not found")
-
-    return team
-
-
-@router.patch("/{teamID}")
-def updateTeam(
-    teamID: int,
-    data: UpdateTeam,
-    db: Session = Depends(database.getSession),
-    reqUser: UserModel = Depends(auth.getRequestUser),
-) -> TeamRead:
-    team = teamUtils.getTeam(teamID, db)
-    if not team or team.creatorID != reqUser.id:
-        raise HTTPException(status_code=404, detail="Team not found")
-
-    team.name = data.name
-    db.commit()
-    db.refresh(team)
-
-    return team
 
 
 @router.delete("/{teamID}")
@@ -122,3 +92,61 @@ def removeMember(
         raise HTTPException(status_code=400, detail="User isn't in the Team")
 
     return {"message": "Success"}
+
+@router.get("/{teamID}/members")
+def getTeamMembers(
+    teamID: int,
+    db: Session = Depends(database.getSession),
+    reqUser: UserModel = Depends(auth.getRequestUser),
+) -> list[UserRead]:
+    team = teamUtils.getTeam(teamID, db)
+    if not team or (not auth.isMemberInTeam(reqUser, team) and team.creatorID != reqUser.id):
+        raise HTTPException(status_code=404, detail="Team not found")
+
+    team.members.append(team.teamCreator)
+    return team.members
+
+@router.get("/{teamID}/tasks")
+def getTeamTasks(
+    teamID: int,
+    db: Session = Depends(database.getSession),
+    reqUser: UserModel = Depends(auth.getRequestUser),
+) -> list[TaskRead]:
+    team = teamUtils.getTeam(teamID, db)
+    if not team or (not auth.isMemberInTeam(reqUser, team) and team.creatorID != reqUser.id):
+        raise HTTPException(status_code=404, detail="Team not found")
+
+    return team.assignedTasks
+
+@router.get("/{teamID}")
+def getTeam(
+    teamID: int,
+    db: Session = Depends(database.getSession),
+    reqUser: UserModel = Depends(auth.getRequestUser),
+) -> TeamRead:
+    team = teamUtils.getTeam(teamID, db)
+    if not team:
+        raise HTTPException(status_code=404, detail="Team not found")
+
+    if not auth.isMemberInTeam(reqUser, team) and team.creatorID != reqUser.id:
+        raise HTTPException(status_code=404, detail="Team not found")
+
+    return team
+
+
+@router.patch("/{teamID}")
+def updateTeam(
+    teamID: int,
+    data: UpdateTeam,
+    db: Session = Depends(database.getSession),
+    reqUser: UserModel = Depends(auth.getRequestUser),
+) -> TeamRead:
+    team = teamUtils.getTeam(teamID, db)
+    if not team or team.creatorID != reqUser.id:
+        raise HTTPException(status_code=404, detail="Team not found")
+
+    team.name = data.name
+    db.commit()
+    db.refresh(team)
+
+    return team
