@@ -31,9 +31,10 @@ class UserModel(Base):
         back_populates="assignedTo", foreign_keys=[TaskModel.assignedToID]
     )
     createdTasks: Mapped[list["TaskModel"]] = relationship(
-        back_populates="creator", foreign_keys=[TaskModel.creatorID]
+        back_populates="creator", foreign_keys=[TaskModel.creatorID],
+        cascade="all, delete-orphan"
     )
-    createdTeams: Mapped[list["TeamModel"]] = relationship(back_populates="teamCreator")
+    createdTeams: Mapped[list["TeamModel"]] = relationship(back_populates="teamCreator", cascade="all, delete-orphan")
     joinedTeams: Mapped[list["TeamModel"]] = relationship(
         back_populates="members", secondary=associationTable
     )

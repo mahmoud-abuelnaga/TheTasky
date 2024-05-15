@@ -41,7 +41,7 @@ class TaskModel(Base):
 
     __creatorID: Mapped[int] = mapped_column(
         "creatorID",
-        ForeignKey("users.id", ondelete="SET NULL", onupdate="CASCADE"),
+        ForeignKey("users.id", ondelete="CASCADE", onupdate="CASCADE"),
         nullable=True,
     )
     creator: Mapped["UserModel"] = relationship(
@@ -64,7 +64,7 @@ class TaskModel(Base):
         backref="subTasks", remote_side="TaskModel.id"
     )
 
-    reminders: Mapped[list["ReminderModel"]] = relationship(back_populates="task")
+    reminders: Mapped[list["ReminderModel"]] = relationship(back_populates="task", cascade="all, delete-orphan")
 
     # properties
     @hybrid_property

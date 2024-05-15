@@ -10,7 +10,7 @@ from models.reminder import ReminderModel
 from models.team import TeamModel
 
 # our modules
-from utils import database, auth, user as userUtils ,bacground_tasks
+from utils import database, auth, user as userUtils ,background_tasks
 
 # routers
 from routers import user, task, team, auth, reminder
@@ -33,7 +33,7 @@ app.include_router(reminder.router)
 
 # start background tasks
 
-bacground_tasks.start_scheduler()
+background_tasks.start_scheduler()
 
 # routes
 @app.get("/")
