@@ -4,7 +4,6 @@
 <TaskScreen>:
     id: task_screen
     name: "tasks"
-
     MDFabButton:
         id: add_button
         icon: "plus"
@@ -15,8 +14,6 @@
         on_press: root.open_add_task_window()
         pos_hint: {"center_x": .9, "center_y": .05}
 
-
-    
     MDFloatLayout:
         MDLabel:
             text: "My Tasks"
@@ -36,7 +33,7 @@
             pos_hint: {"center_x": .9, "center_y": .96}
             on_release: root.open_info_screen()
 
-    MDScrollView:
+    ScrollView:
         pos_hint: {"center_x": .55, "top": .93}
         size_hint_x: 1
         size_hint_y: .84
@@ -44,20 +41,16 @@
             id : tasks_container
             orientation: "vertical"
             adaptive_height: True
-            radius: 16
             spacing: "100dp"
-            padding: 0, 0, 0, "16dp"
+            padding: 0, "100dp", 0, 0
             pos_hint: {"center_x": .5, "top": .8}
             size_hint_x: .9
 
-            # dummy: don't remove 
-            TaskCard:
-                title: "My First Task"
-                note: "this is a description"
+            # TaskCard:
+            #     title: "Use your chatgpt"
+            #     team: "SWE"
+            #     time: "12:12"
+            #     date: "3/5/2025"
+            #     progress: 0
+            #     priority: "lightgreen" 
 
-            TaskCard:
-                title: "Use your chatgpt"
-                team: "SWE"
-                time: "12:12"
-                date: "3/5/2025"
-                note: "this is a description"

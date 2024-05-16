@@ -1,9 +1,10 @@
 #: include kvfiles/commons.kv
 #: import ButtonColor components.commons.ButtonColor
+#: import OverDue components.commons.OverDue
 
 <TaskInfoScreen>:
     id: task_info
-    name: "add_task"
+    name: "task_info"
     MDFloatLayout:
         BackButton:
             id: back_button
@@ -22,14 +23,14 @@
 
     MDBoxLayout:
         orientation: "vertical"
-        spacing: "35dp"
+        spacing: "60dp"
         adaptive_height: True
         size_hint_x: .8
-        pos_hint: {"center_x": .5, "center_y": .5}
+        pos_hint: {"center_x": .5, "top": .88}
 
         MDBoxLayout:
             orientation: "vertical"
-            spacing: "25dp"
+            spacing: "45dp"
             adaptive_height: True
 
             MDLabel:
@@ -41,80 +42,15 @@
                 bold: True
 
             MDLabel:
-                text: root.title
+                text: root.task.title if root.task else ""
                 theme_text_color: "Custom"
                 text_color: "#ffffff"
                 font_style: "Title"
                 role: "large"
-            
-            
 
         MDBoxLayout:
             orientation: "vertical"
-            spacing: "25dp"
-            adaptive_height: True
-            MDLabel:
-                text: "Note"
-                theme_text_color: "Custom"
-                text_color: "#ffffff"
-                font_style: "Title"
-                role: "large"
-                bold: True
-
-            MDTextField:
-                id: note_field
-                mode: "outlined"
-                theme_text_color: "Custom"
-                theme_line_color: "Custom"
-                theme_bg_color: "Custom"
-                line_color_focus: "green"
-                text_color_normal: 1,1,1,1
-                text_color_focus: 1,1,1,1
-                # multiline: True
-                # max_height: "80sp"
-
-                MDTextFieldHintText:
-                    text: "Task Description"
-                    theme_text_color: "Custom"
-                    text_color_normal: 1,1,1,1
-                    text_color_focus: 1,1,1,1
-        
-        MDBoxLayout:
-            orientation: "vertical"
-            spacing: "25dp"
-            adaptive_height: True
-
-
-            MDLabel:
-                text: "Due Date"
-                theme_text_color: "Custom"
-                text_color: "#ffffff"
-                font_style: "Title"
-                role: "large"
-                bold: True
-
-            MDTextField:
-                id: date_field
-                mode: "outlined"
-                theme_text_color: "Custom"
-                theme_line_color: "Custom"
-                theme_bg_color: "Custom"
-                line_color_focus: "green"
-                text_color_normal: 1,1,1,1
-                text_color_focus: 1,1,1,1
-                date_format: "dd/mm/yyyy"
-                on_focus: root.show_date_picker(self.focus)
-
-                MDTextFieldHintText:
-                    text: "dd/mm/yyyy"
-                    theme_text_color: "Custom"
-                    text_color_normal: 1,1,1,1
-                    text_color_focus: 1,1,1,1
-
-
-        MDBoxLayout:
-            orientation: "vertical"
-            spacing: "25dp"
+            spacing: "45dp"
             adaptive_height: True
 
             MDLabel:
@@ -125,85 +61,20 @@
                 role: "large"
                 bold: True
 
-            MDTextField:
-                id: time_field
-                mode: "outlined"
-                theme_text_color: "Custom"
-                theme_line_color: "Custom"
-                theme_bg_color: "Custom"
-                line_color_focus: "green"
-                text_color_normal: 1,1,1,1
-                text_color_focus: 1,1,1,1
-                on_focus: root.show_time_picker(self.focus)
-
-                MDTextFieldHintText:
-                    text: "hh:mm:ss"
-                    theme_text_color: "Custom"
-                    text_color_normal: 1,1,1,1
-                    text_color_focus: 1,1,1,1
-
-        MDBoxLayout:
-            orientation: "vertical"
-            spacing: "25dp"
-            adaptive_height: True
             MDLabel:
-                text: "Assigned To"
+                text: f"{root.task.date} {root.task.time}" if root.task else ""
                 theme_text_color: "Custom"
                 text_color: "#ffffff"
                 font_style: "Title"
                 role: "large"
-                bold: True
-
-            MDTextField:
-                id : assigned_to_field
-                mode: "outlined"
-                theme_text_color: "Custom"
-                theme_line_color: "Custom"
-                theme_bg_color: "Custom"
-                line_color_focus: "green"
-                text_color_normal: 1,1,1,1
-                text_color_focus: 1,1,1,1
-
-                MDTextFieldHintText:
-                    text: "Name or Email"
-                    theme_text_color: "Custom"
-                    text_color_normal: 1,1,1,1
-                    text_color_focus: 1,1,1,1
 
         MDBoxLayout:
             orientation: "vertical"
-            spacing: "25dp"
+            spacing: "0dp"
             adaptive_height: True
+
             MDLabel:
-                text: "Team"
-                theme_text_color: "Custom"
-                text_color: "#ffffff"
-                font_style: "Title"
-                role: "large"
-                bold: True
-
-            MDTextField:
-                id: team_field
-                mode: "outlined"
-                theme_text_color: "Custom"
-                theme_line_color: "Custom"
-                theme_bg_color: "Custom"
-                line_color_focus: "green"
-                text_color_normal: 1,1,1,1
-                text_color_focus: 1,1,1,1
-
-                MDTextFieldHintText:
-                    text: "Team Name"
-                    theme_text_color: "Custom"
-                    text_color_normal: 1,1,1,1
-                    text_color_focus: 1,1,1,1
-
-        MDBoxLayout:
-            orientation: "vertical"
-            spacing: "5dp"
-            adaptive_height: True
-            MDLabel:
-                text: "Priority"
+                text: "Progress"
                 theme_text_color: "Custom"
                 text_color: "#ffffff"
                 font_style: "Title"
@@ -211,9 +82,9 @@
                 bold: True
 
             MDSlider:
-                id: priority_field
-                value: 0
-                max: 5
+                id: progress_field
+                value: int(root.task.progress*100) if root.task else 0
+                max: 100
                 step: 1
                 track_active_color : ButtonColor
                 MDSliderHandle:
@@ -224,15 +95,15 @@
                     color : ButtonColor
 
     MDButton:
-        id: add_task_button
+        id: mark_complete
         style: "filled"
-        pos_hint: {"center_x": .5, "center_y":.08}
+        pos_hint: {"center_x": .5, "center_y":.3}
         theme_width: "Custom"
         theme_height: "Custom"
         size_hint_x: .3
         size_hint_y: .04
         theme_bg_color: "Custom"
-        on_release: root.create_task()
+        on_release: root.update_progress() 
         md_bg_color: ButtonColor
         radius: 15
 
@@ -240,7 +111,53 @@
             icon: "plus"
 
         MDButtonText:
-            text: "Create Task"
+            text: "UPDATE PROGRESS"
+            theme_font_size: "Custom"
+            theme_font_name: "Custom"
+            font_name: "assets/Poppins/Poppins-Bold.ttf"
+            pos_hint: {"center_x": .55, "center_y": .5}
+
+    MDButton:
+        id: mark_complete
+        style: "filled"
+        pos_hint: {"center_x": .5, "center_y":.25}
+        theme_width: "Custom"
+        theme_height: "Custom"
+        size_hint_x: .3
+        size_hint_y: .04
+        theme_bg_color: "Custom"
+        on_release: root.complete_task()
+        md_bg_color: "lightgreen"
+        radius: 15
+
+        MDButtonIcon:
+            icon: "checkbox-marked"
+
+        MDButtonText:
+            text: "COMPLETE TASK"
+            theme_font_size: "Custom"
+            theme_font_name: "Custom"
+            font_name: "assets/Poppins/Poppins-Bold.ttf"
+            pos_hint: {"center_x": .55, "center_y": .5}
+
+    MDButton:
+        id: mark_complete
+        style: "filled"
+        pos_hint: {"center_x": .5, "center_y":.13}
+        theme_width: "Custom"
+        theme_height: "Custom"
+        size_hint_x: .3
+        size_hint_y: .04
+        theme_bg_color: "Custom"
+        on_release: root.delete_task()
+        md_bg_color: OverDue
+        radius: 15
+
+        MDButtonIcon:
+            icon: "minus"
+
+        MDButtonText:
+            text: "DELETE TASK"
             theme_font_size: "Custom"
             theme_font_name: "Custom"
             font_name: "assets/Poppins/Poppins-Bold.ttf"

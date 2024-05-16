@@ -1,26 +1,48 @@
 #: import ButtonColor components.commons.ButtonColor
+#: import ButtonColor_back components.commons.ButtonColor_back
+#: import OverDue components.commons.OverDue
+#: import OverDue_back components.commons.OverDue_back
 
 <TaskCard>
-    MDListItem:
-        theme_bg_color: "Custom"
-        md_bg_color: ButtonColor
-        radius: root.radius
-        pos_hint: {"center_x": .5}
+    MDRelativeLayout:
         size_hint_x: .9
-        radius: 16
+        pos_hint: {"center_x": .5}
 
-        MDListItemLeadingAvatar:
-            source: root.avatar
-            radius: self.height / 2
-            color: "lightgreen"
+        MDListItem:
+            id: listitem
+            theme_bg_color: "Custom"
+            md_bg_color: ButtonColor if not root.overdue else OverDue
+            radius: root.radius
+            radius: 16
+            size_hint_x: root.progress
+            pos_hint: {"right": self.size_hint_x}
 
-        MDListItemHeadlineText:
-            text: f"[ {root.team} ]  {root.title}"
-            theme_text_color: "Custom"
-            color: "#ffffff"
+
+            MDListItemLeadingAvatar:
+                color: "#ffffff00"
+
+            MDListItemHeadlineText:
+            
+            MDListItemSupportingText:
+ 
+        MDListItem:
+            id: listitem
+            theme_bg_color: "Custom"
+            md_bg_color: ButtonColor_back if not root.overdue else OverDue_back
+            radius: 16
+            on_release: root.open_task_info_screen()
+            
+            MDListItemLeadingAvatar:
+                radius: self.height / 2
+                color: root.priority
+
+            MDListItemHeadlineText:
+                text: f"[ {root.team} ]  {root.title}"
+                theme_text_color: "Custom"
+                color: "#ffffff"
 
 
-        MDListItemSupportingText:
-            text: f"Due:  {root.date}  {root.time}"
-            theme_text_color: "Custom"
-            text_color: "#ffffff"
+            MDListItemSupportingText:
+                text: f"Due:  {root.date}  {root.time}"
+                theme_text_color: "Custom"
+                text_color: "#ffffff"
