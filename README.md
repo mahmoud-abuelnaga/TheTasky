@@ -1,17 +1,27 @@
 # Tasky
 Task management app in Python
 
+<p align="center">
+  <img src="shots/01.jpeg" width="100" />
+  <img src="shots/02.jpeg" width="100" /> 
+  <img src="shots/03.jpeg" width="100" /> 
+  <img src="shots/04.jpeg" width="100" /> 
+  <img src="shots/05.jpeg" width="100" /> 
+</p>
+
+<p align="center">
+  <img src="shots/06.jpeg" width="100" />
+  <img src="shots/07.jpeg" width="100" /> 
+  <img src="shots/08.jpeg" width="100" /> 
+  <img src="shots/09.jpeg" width="100" /> 
+  <img src="shots/10.jpeg" width="100" /> 
+</p>
+
+
 ## Installation
 
-- Install backend dependencies,
+- Install dependencies,
 ```sh
-$ git checkout backend
-$ pip install -r requirements.txt
-```
-
-- Install frontend dependencies,
-```sh
-$ git checkout front
 $ pip install -r requirements.txt
 ```
 
@@ -19,12 +29,10 @@ $ pip install -r requirements.txt
 
 In one terminal tab, execute the server 
 ```sh
-$ git checkout backend
 $ uvicorn main:app
 ```
 
 In another tab, execute the gui,
 ```sh
-$ git checkout frontend
 $ python3 app.py
 ```
