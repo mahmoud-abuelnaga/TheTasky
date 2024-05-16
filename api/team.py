@@ -1,7 +1,6 @@
 from .base import session, BASE_URL
 from .user import get_user_details
 
-
 def create_team(token, team_name):
     response = session.post(
         f"{BASE_URL}/teams/create",
@@ -11,8 +10,6 @@ def create_team(token, team_name):
     team_id = None
     if response.ok:
         team_id = response.json()["id"]
-    print(response)
-    print(response.json())
     return response.ok, team_id
 
 
@@ -29,4 +26,23 @@ def join_team(token, team_id):
     add_member(token, team_id, my_email)
 
 def get_team_members(token, team_id):
-    return [{"name": "Mohmaed", "id": 2}]
+
+    response = session.get(
+        f"{BASE_URL}/teams/{team_id}/members",
+        headers={"token-bearer": token},
+    )
+    members = []
+    if response.ok:
+        members = response.json()
+    return members
+
+
+def get_team_name(token, team_id):
+    response = session.get(
+        f"{BASE_URL}/teams/{team_id}",
+        headers={"token-bearer": token},
+    )
+    name = ""
+    if response.ok:
+        name = response.json()["name"]
+    return name

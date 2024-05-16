@@ -19,8 +19,8 @@ from .commons import *
 
 class AddTaskScreen(Screen):
     screen_manager = ObjectProperty(None)
-    team_id = ObjectProperty(None)
-    member_id = ObjectProperty(None)
+    team_id = None
+    member_id = None
 
     def on_select_day(self, instance_date_picker, number_day):
         instance_date_picker.dismiss()
@@ -61,6 +61,7 @@ class AddTaskScreen(Screen):
     def set_team_name(self, team):
         self.ids["team_field"].text = team["name"]
         self.team_id = team["id"]
+        self.member_id = None
         self.team_menu.dismiss()
 
     def open_team_members_menu(self, focus, *_):
@@ -127,8 +128,9 @@ class AddTaskScreen(Screen):
         task_db = self.map_to_db_task(task)
         status = create_task(self.screen_manager.token, task_db)
         if status:
-            screen = self.screen_manager.get_screen("tasks")
-            # screen.add_task(task)
+            self.team_id = None
+            self.member_id = None
+            show_success_on_screen("Task is added successfully")
             self.back()
 
     def date_on_ok(self, picker, *_):

@@ -12,6 +12,9 @@ from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.snackbar import MDSnackbar, MDSnackbarSupportingText, MDSnackbarText
 
 ButtonColor = "#2992b5"
+ButtonColor_back = "#2992b560"
+OverDue = "#fa7c73"
+OverDue_back = "#fa7c7360"
 
 
 def make_transition(screen_manager, screen_name, direction="left"):
